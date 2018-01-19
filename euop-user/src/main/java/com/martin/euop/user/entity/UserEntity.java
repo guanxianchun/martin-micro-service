@@ -2,6 +2,12 @@ package com.martin.euop.user.entity;
 
 import java.io.Serializable;
 
+/**
+ * Author 管贤春
+ * Email psyche19830113@163.com
+ * Date 2018-01-19 12:50:12
+ * Descrition 用户实体类
+ */
 public class UserEntity implements Serializable {
     //
     private String userId;

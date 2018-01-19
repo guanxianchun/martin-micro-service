@@ -1,8 +1,7 @@
 package com.martin.euop.user;
 
-import com.martin.euop.service.UserService;
+import com.martin.euop.user.service.UserService;
 import com.martin.euop.user.entity.UserEntity;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
