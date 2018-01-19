@@ -3,17 +3,20 @@
 <mapper namespace="com.martin.euop.user.mapper.UserMapper">
     <resultMap id="UserResultMap" type="com.martin.euop.user.entity.UserEntity">
         <id column="f_user_id" property="userId"/>
-        <result column="f_login_name" property="userName"/>
-        <result column="f_dept_id" property="userDeptId"/>
-        <result column="f_type" property="userType"/>
-        <result column="f_user_type" property="userPlatform"/>
+        <result column="f_user_name" property="userName"/>
+        <result column="f_description" property="description"/>
+        <result column="f_phone" property="phone"/>
+        <result column="f_user_type" property="userType"/>
+        <result column="f_age" property="age"/>
+        <result column="f_address" property="address"/>
+        <result column="f_create_time" property="createTime"/>
     </resultMap>
     <select id="getUserById" resultMap="UserResultMap" parameterType="string">
-      SELECT f_user_id,f_login_name,f_dept_id,f_type,f_user_type FROM t_user WHERE f_user_id=#{userId}
+      SELECT f_user_id,f_user_name,f_description,f_phone,f_user_type,f_age,f_address,f_create_time FROM t_users WHERE f_user_id=#{userId}
     </select>
 
     <select id="getUserByName" resultMap="UserResultMap" parameterType="string">
-        SELECT f_user_id,f_login_name,f_dept_id,f_type,f_user_type FROM t_user WHERE f_login_name=#{userName}
+        SELECT f_user_id,f_user_name,f_description,f_phone,f_user_type,f_age,f_address,f_create_time FROM t_users WHERE f_login_name=#{userName}
     </select>
 
 </mapper>

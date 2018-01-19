@@ -73,5 +73,6 @@
 	<modules>
 		<module>euop-register</module>
 		<module>euop-user</module>
+		<module>auth-center</module>
 	</modules>
 </project>

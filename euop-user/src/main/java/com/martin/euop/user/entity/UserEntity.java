@@ -1,6 +1,7 @@
 package com.martin.euop.user.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * Author 管贤春
@@ -12,9 +13,12 @@ public class UserEntity implements Serializable {
     //
     private String userId;
     private String userName;
-    private Integer userDeptId;
     private Integer userType;
-    private Integer userPlatform;
+    private String description;
+    private Integer age;
+    private String phone;
+    private String address;
+    private Date createTime;
 
     public String getUserId() {
         return userId;
@@ -32,14 +36,6 @@ public class UserEntity implements Serializable {
         this.userName = userName;
     }
 
-    public Integer getUserDeptId() {
-        return userDeptId;
-    }
-
-    public void setUserDeptId(Integer userDeptId) {
-        this.userDeptId = userDeptId;
-    }
-
     public Integer getUserType() {
         return userType;
     }
@@ -48,11 +44,43 @@ public class UserEntity implements Serializable {
         this.userType = userType;
     }
 
-    public Integer getUserPlatform() {
-        return userPlatform;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUserPlatform(Integer userPlatform) {
-        this.userPlatform = userPlatform;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
