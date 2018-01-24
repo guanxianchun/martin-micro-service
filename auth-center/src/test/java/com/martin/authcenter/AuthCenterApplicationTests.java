@@ -1,4 +1,4 @@
-package com.martion.authcenter;
+package com.martin.authcenter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.martin.authcenter.auth.dao.UserDao">
+    <resultMap id="UserResultMap" type="com.martin.authcenter.auth.entity.UserEntity">
+        <id column="f_user_id" property="userId"/>
+        <result column="f_user_name" property="userName"/>
+        <result column="f_password" property="password"/>
+        <result column="f_description" property="description"/>
+        <result column="f_phone" property="phone"/>
+        <result column="f_user_type" property="userType"/>
+        <result column="f_age" property="age"/>
+        <result column="f_address" property="address"/>
+        <result column="f_create_time" property="createTime"/>
+    </resultMap>
+    <select id="findByUserId" resultMap="UserResultMap" parameterType="string">
+      SELECT f_user_id,f_user_name,f_description,f_phone,f_user_type,f_age,f_address,f_create_time FROM t_users WHERE f_user_id=#{userId}
+    </select>
+
+    <select id="findByUserName" resultMap="UserResultMap" parameterType="string">
+        SELECT f_user_id,f_user_name,f_description,f_phone,f_user_type,f_age,f_address,f_create_time,f_password FROM t_users WHERE f_user_name=#{userName}
+    </select>
+
+</mapper>

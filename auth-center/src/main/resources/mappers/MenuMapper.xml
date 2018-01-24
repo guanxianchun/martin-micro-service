@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.martin.authcenter.auth.dao.PrivilegeDao">
+    <resultMap id="UserResultMap" type="com.martin.authcenter.auth.entity.MenuEntity">
+        <id column="f_id" property="id"/>
+        <result column="f_code" property="code"/>
+        <result column="f_parent_id" property="parentId"/>
+        <result column="f_parent_code" property="parentCode"/>
+        <result column="f_name" property="name"/>
+        <result column="f_url" property="url"/>
+        <result column="f_icon" property="icon"/>
+        <result column="f_is_menu" property="isMenu"/>
+        <result column="f_level" property="level"/>
+        <result column="f_sort" property="sort"/>
+        <result column="f_status" property="status"/>
+        <result column="f_create_time" property="createTime"/>
+        <result column="f_update_time" property="updateTime"/>
+
+    </resultMap>
+    <select id="findPrivilegeByRoleId" resultMap="UserResultMap" parameterType="int">
+      SELECT t1.* FROM t_menus t1,t_privilege t2 WHERE t2.f_role_id=#{roleId} and t2.f_menu_id=t1.f_id
+    </select>
+
+</mapper>

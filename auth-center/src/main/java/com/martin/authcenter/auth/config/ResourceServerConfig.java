@@ -1,0 +1,23 @@
+package com.martin.authcenter.auth.config;
+
+import org.springframework.boot.autoconfigure.security.Http401AuthenticationEntryPoint;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+
+/**
+ * Author 管贤春
+ * Email psyche19830113@163.com
+ * Date 1/24/18 2:21 PM
+ * Descrition 资源服务
+ */
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(new Http401AuthenticationEntryPoint("bearer realm=\"webrealm\""))
+                .and().authorizeRequests().anyRequest().authenticated()
+                .and().httpBasic();
+    }
+}
