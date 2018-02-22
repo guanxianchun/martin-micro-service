@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: euop-license
+
+  #指定数据库的连接信息
+  datasource:
+    url: jdbc:mysql://localhost:3306/martin-euop
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    username: martin-euop
+  #使用JPA事务
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 7003
+
+#指定服务注册中心的地址
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://localhost:7000/eureka/
+  #自定义实例Id
+  instance:
+    instance-id:  ${spring.application.name}:${random.int}
+

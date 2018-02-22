@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.annotation.Resource;
@@ -27,6 +28,8 @@ public class UserController {
     @Resource
     private LocaleMessageSourceService localeMessageSourceService;
 
+    @Autowired
+    private RestTemplate restTemplate;
 
     @RequestMapping(value = "/users",method = RequestMethod.GET)
     public String getUsers(HttpServletRequest httpRequest){
@@ -44,5 +47,9 @@ public class UserController {
         UserEntity userInfo = userService.getUserById(userId);
         return userInfo;
     }
-
+    @ResponseBody
+    @RequestMapping(value = "/users/{userId}/licenseInfo",method = RequestMethod.GET)
+    public String getUserLicenseInfo(){
+        return restTemplate.getForEntity("http://EUOP-LICENSE/licenseInfo",String.class).getBody();
+    }
 }

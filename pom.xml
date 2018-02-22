@@ -77,5 +77,6 @@
 		<module>euop-register</module>
 		<module>euop-user</module>
 		<module>auth-center</module>
+        <module>euop-license</module>
     </modules>
 </project>
