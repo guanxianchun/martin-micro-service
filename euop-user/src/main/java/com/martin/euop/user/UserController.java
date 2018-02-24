@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -28,8 +29,6 @@ public class UserController {
     @Resource
     private LocaleMessageSourceService localeMessageSourceService;
 
-    @Autowired
-    private RestTemplate restTemplate;
 
     @RequestMapping(value = "/users",method = RequestMethod.GET)
     public String getUsers(HttpServletRequest httpRequest){
@@ -49,7 +48,8 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping(value = "/users/{userId}/licenseInfo",method = RequestMethod.GET)
-    public String getUserLicenseInfo(){
-        return restTemplate.getForEntity("http://EUOP-LICENSE/licenseInfo",String.class).getBody();
+    public String getUserLicenseInfo(HttpServletRequest httpRequest,@PathVariable("userId") String userId){
+        System.out.println("/users/"+userId+"/licenseInfo");
+        return userService.getUserLicense(userId);
     }
 }

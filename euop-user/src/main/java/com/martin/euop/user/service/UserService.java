@@ -23,4 +23,11 @@ public interface UserService {
      * @return
      */
     public List<UserEntity> getUserByName(String userName);
+
+    /**
+     * 测试获取用户的授权　负载均衡(ribbon)　熔断器(hystrix)　
+     * @param userId
+     * @return
+     */
+    public String getUserLicense(String userId);
 }

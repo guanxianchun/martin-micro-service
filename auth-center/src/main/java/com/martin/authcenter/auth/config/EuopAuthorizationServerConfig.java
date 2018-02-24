@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * Author 管贤春
  * Email psyche19830113@163.com
  * Date 1/24/18 1:34 PM
- * Descrition 授权　认证服务
+ * Descrition 开启授权服务器
  */
 @Configuration
 @EnableAuthorizationServer

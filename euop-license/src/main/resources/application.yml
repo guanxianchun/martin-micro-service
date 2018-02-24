@@ -24,7 +24,13 @@ eureka:
     service-url:
       defaultZone:
         http://localhost:7000/eureka/
+#
+security:
+  user:
+    name: martin
+    password: martin
+
   #自定义实例Id
   instance:
-    instance-id:  ${spring.application.name}:${random.int}
+    instance-id:  ${spring.application.name}
 
