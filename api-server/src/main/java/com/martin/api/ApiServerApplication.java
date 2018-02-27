@@ -10,8 +10,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -50,7 +48,7 @@ public class ApiServerApplication {
         new SpringApplicationBuilder(ApiServerApplication.class).web(true).run(args);
     }
     @Configuration
-    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+//    (SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -89,7 +87,7 @@ public class ApiServerApplication {
     }
 
     @Component
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+//    @Order(Ordered.HIGHEST_PRECEDENCE)
     class WorkAroundRestTemplateCustomizer implements UserInfoRestTemplateCustomizer{
         @Override
         public void customize(OAuth2RestTemplate oAuth2RestTemplate) {

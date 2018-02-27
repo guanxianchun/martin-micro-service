@@ -1,17 +1,15 @@
 package com.martin.euop.user.service.impl;
 
-import com.martin.euop.message.LocaleMessageSourceService;
-import com.martin.euop.user.service.UserService;
-import com.martin.euop.user.entity.UserEntity;
-import com.martin.euop.user.mapper.UserMapper;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import com.martin.euop.user.entity.UserEntity;
+import com.martin.euop.user.mapper.UserMapper;
+import com.martin.euop.user.service.UserService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class UserServiceImpl implements UserService {
