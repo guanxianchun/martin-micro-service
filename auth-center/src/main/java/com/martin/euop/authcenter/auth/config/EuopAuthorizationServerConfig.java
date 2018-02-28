@@ -1,6 +1,9 @@
 package com.martin.euop.authcenter.auth.config;
 
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +16,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import com.martin.euop.authcenter.auth.service.impl.EuopUserDetailsService;
-
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Author 管贤春
@@ -49,17 +47,17 @@ public class EuopAuthorizationServerConfig extends AuthorizationServerConfigurer
         return new JdbcClientDetailsService(dataSource);
     }
 
-    @Bean
-    DefaultTokenServices defaultTokenServices(){
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setTokenStore(redisTokenStore());
-        tokenServices.setSupportRefreshToken(true);
-        tokenServices.setClientDetailsService(clientDetails());
-        //设置token的有效时间是１天
-        tokenServices.setAccessTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(1));
-        tokenServices.setRefreshTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(7));
-        return tokenServices;
-    }
+//    @Bean
+//    DefaultTokenServices defaultTokenServices(){
+//        DefaultTokenServices tokenServices = new DefaultTokenServices();
+//        tokenServices.setTokenStore(redisTokenStore());
+//        tokenServices.setSupportRefreshToken(true);
+//        tokenServices.setClientDetailsService(clientDetails());
+//        //设置token的有效时间是１天
+//        tokenServices.setAccessTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(1));
+//        tokenServices.setRefreshTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(7));
+//        return tokenServices;
+//    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -68,18 +66,18 @@ public class EuopAuthorizationServerConfig extends AuthorizationServerConfigurer
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(redisTokenStore())
+        endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
-                .authenticationManager(authenticationManager)
-                .tokenServices(defaultTokenServices());
+                .tokenStore(redisTokenStore());
+//                .tokenServices(defaultTokenServices());
 
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()");
-        security.checkTokenAccess("isAuthenticated()");
-        security.allowFormAuthenticationForClients();
+        security.tokenKeyAccess("permitAll()")
+        		.checkTokenAccess("isAuthenticated()")
+        		.allowFormAuthenticationForClients();
     }
 
 }

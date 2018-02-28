@@ -29,8 +29,11 @@ security:
   user:
     name: martin
     password: martin
-
+  oauth2:
+    resource:
+      id: euop-license
+      user-info-uri: http://localhost:7002/user
+      prefer-token-info: false
   #自定义实例Id
   instance:
     instance-id:  ${spring.application.name}
-
