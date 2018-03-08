@@ -9,6 +9,7 @@ import java.util.Date;
  * Date 2018-01-23 2:42 PM
  * Descrition 菜单及请求操作实体类
  */
+@SuppressWarnings("serial")
 public class MenuEntity implements Serializable {
 
     private String id;

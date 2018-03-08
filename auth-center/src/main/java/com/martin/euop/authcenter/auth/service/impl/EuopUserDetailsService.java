@@ -46,12 +46,15 @@ public class EuopUserDetailsService implements UserDetailsService {
         boolean credentialExpired = false;  //有效性　
         boolean isLocked = false;   //锁定性　true :锁定　
         List<RoleEntity> roles = roleService.findRoleByUserId(userEntity.getUserId());
+        System.out.println("user "+userName+" has privileges :");
         for(RoleEntity roleEntity:roles){
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+roleEntity.getName());
             authorities.add(authority);
             //get role permission
             List<MenuEntity> privilegeEntities = privilegeService.findPrivilegeByRoleId(roleEntity.getId());
+            
             for (MenuEntity menuEntity : privilegeEntities){
+            	System.out.println(menuEntity.getCode());
                 GrantedAuthority menuAuthority = new SimpleGrantedAuthority(menuEntity.getCode());
                 authorities.add(menuAuthority);
             }

@@ -47,18 +47,6 @@ public class EuopAuthorizationServerConfig extends AuthorizationServerConfigurer
         return new JdbcClientDetailsService(dataSource);
     }
 
-//    @Bean
-//    DefaultTokenServices defaultTokenServices(){
-//        DefaultTokenServices tokenServices = new DefaultTokenServices();
-//        tokenServices.setTokenStore(redisTokenStore());
-//        tokenServices.setSupportRefreshToken(true);
-//        tokenServices.setClientDetailsService(clientDetails());
-//        //设置token的有效时间是１天
-//        tokenServices.setAccessTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(1));
-//        tokenServices.setRefreshTokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(7));
-//        return tokenServices;
-//    }
-
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(clientDetails());
@@ -69,7 +57,6 @@ public class EuopAuthorizationServerConfig extends AuthorizationServerConfigurer
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
                 .tokenStore(redisTokenStore());
-//                .tokenServices(defaultTokenServices());
 
     }
 
