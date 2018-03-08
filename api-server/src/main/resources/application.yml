@@ -1,0 +1,60 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: api-server
+security:
+  user:
+    password: martin
+    name: martin
+  #配置认证服务器信息
+  oauth2:
+    client: 
+      access-token-uri: http://localhost:7002/oauth/token
+      user-authorization-uri: http://localhost:7002/oauth/authorize
+    resource:
+      user-info-uri: http://localhost:7002/user
+      prefer-token-info: false
+
+#指定服务注册中心的地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+#设置服务路由
+zuul:
+  routes:
+    user-serivce:
+      path: /user-service/**
+      serviceId: user-service
+      sensitiveHeaders: 
+    euop-license:
+      path: /euop-license/**
+      serviceId: euop-license
+      sensitiveHeaders: 
+
+    auth-service:
+      path: /auth-service/**
+      serviceId: auth-service
+      sensitiveHeaders: 
+  add-proxy-headers: true
+
+ribbon:
+  eureka:
+    enabled: false
+  #这里的超时时间必须要大于服务负载均衡中的熔断器中的超时时间　不然会报read timeout                    
+  ReadTimeout: 6000 
+user-service:
+  ribbon:
+    listOfServers: http://localhost:7001/
+euop-license:
+  ribbon:
+    listOfServers: http://localhost:7003/,http://localhost:7004/
+auth-service:
+  ribbon:
+    listOfServers: http://localhost:7002/
+
+logging:
+  level:
+    root: debug
+
