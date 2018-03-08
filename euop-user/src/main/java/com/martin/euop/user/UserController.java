@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -31,6 +32,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/users",method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('/users')")
     public String getUsers(HttpServletRequest httpRequest){
         ServiceInstance instance = client.getLocalServiceInstance();
         System.out.println(localeMessageSourceService.getMessage("euop.user.login_name",RequestContextUtils.getLocale(httpRequest)));
