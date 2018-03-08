@@ -1,5 +1,7 @@
 package com.martin.euop.license;
 
+import java.util.Random;
+
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +11,6 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.RequestContextUtils;
-
-import java.util.Random;
 
 /**
  * Author 管贤春
@@ -24,7 +23,8 @@ public class LicenseController {
     private final Logger logger = LoggerFactory.getLogger(LicenseController.class);
     @Autowired
     private DiscoveryClient client;
-    @RequestMapping(value = "/licenseInfo",method = RequestMethod.GET)
+    @SuppressWarnings("deprecation")
+	@RequestMapping(value = "/licenseInfo",method = RequestMethod.GET)
     public String getLicenseInfo(@Param("userId") String userId){
         ServiceInstance instance = client.getLocalServiceInstance();
         logger.info("/users/"+userId+"/licenseInfo, host : "+instance.getHost()+" service instance id : "+instance.getServiceId());

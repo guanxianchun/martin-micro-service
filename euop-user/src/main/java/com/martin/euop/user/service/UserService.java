@@ -27,7 +27,8 @@ public interface UserService {
     /**
      * 测试获取用户的授权　负载均衡(ribbon)　熔断器(hystrix)　
      * @param userId
+     * @param token
      * @return
      */
-    public String getUserLicense(String userId);
+    public String getUserLicense(String userId,String token);
 }

@@ -26,13 +26,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @HystrixCommand(fallbackMethod = "userLicenseFallback")
-    public String getUserLicense(String userId) {
-        return restTemplate.getForEntity("http://EUOP-LICENSE/licenseInfo?userId="+userId,String.class).getBody();
+    public String getUserLicense(String userId,String token) {
+    	String url = "http://EUOP-LICENSE/licenseInfo?userId="+userId+"&access_token="+token;
+        return restTemplate.getForEntity(url,String.class).getBody();
     }
 
-    public String userLicenseFallback(String userId){
+    public String userLicenseFallback(String userId,String token){
         return "error";
     }
+    
     @Override
     public UserEntity getUserById(String userId) {
         return userMapper.getUserById(userId);

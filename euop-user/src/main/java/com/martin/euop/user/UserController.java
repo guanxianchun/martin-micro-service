@@ -21,6 +21,7 @@ import com.martin.euop.user.entity.UserEntity;
 import com.martin.euop.user.service.UserService;
 
 @RestController
+@PreAuthorize("hasAuthority('/users')")
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -34,18 +35,19 @@ public class UserController {
     private LocaleMessageSourceService localeMessageSourceService;
 
 
-    @RequestMapping(value = "/users",method = RequestMethod.GET)
-    @PreAuthorize("hasAuthority('/users')")
+    @SuppressWarnings("deprecation")
+	@RequestMapping(value = "/users",method = RequestMethod.GET)
     public String getUsers(HttpServletRequest httpRequest){
         ServiceInstance instance = client.getLocalServiceInstance();
         System.out.println(localeMessageSourceService.getMessage("euop.user.login_name",RequestContextUtils.getLocale(httpRequest)));
         logger.info("/users, host : "+instance.getHost()+" service instance id : "+instance.getServiceId());
         return "Hello World !";
     }
-    @ResponseBody
+    @SuppressWarnings("deprecation")
+	@ResponseBody
     @RequestMapping(value = "/users/{userId}",method = RequestMethod.GET)
     public UserEntity getUserInfo(HttpServletRequest httpRequest,@PathVariable("userId") String userId){
-        System.out.println(localeMessageSourceService.getMessage("euop.user.login_name",new Object[]{"gxc"},RequestContextUtils.getLocale(httpRequest)));
+    	logger.info(localeMessageSourceService.getMessage("euop.user.login_name",new Object[]{"gxc"},RequestContextUtils.getLocale(httpRequest)));
         ServiceInstance instance = client.getLocalServiceInstance();
         logger.info("/users/"+userId+", host : "+instance.getHost()+" service instance id : "+instance.getServiceId()+" userId="+userId);
         UserEntity userInfo = userService.getUserById(userId);
@@ -54,7 +56,6 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/users/{userId}/licenseInfo",method = RequestMethod.GET)
     public String getUserLicenseInfo(HttpServletRequest httpRequest,@PathVariable("userId") String userId){
-        System.out.println("/users/"+userId+"/licenseInfo");
-        return userService.getUserLicense(userId);
+        return userService.getUserLicense(userId,httpRequest.getParameter("access_token"));
     }
 }
